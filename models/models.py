@@ -21,6 +21,6 @@ class Session(models.Model):
     duration = fields.Float(digits=(6, 2), help="Duration in days") #por si el curso dura mediodia asi se puede representar
     seats = fields.Integer(string="Seat's number")
 
-    instructor_id = fields.Many2one('res.partner', string='Instructor', domain=[('is_instructor','=', True)])
+    instructor_id = fields.Many2one('res.partner', string='Instructor', domain=['|', ('is_instructor', '=', True),'|',('category_id.name', 'ilike', 'Teacher'), ('category_id.parent_id.name', 'ilike', 'Teacher')])
     course_id = fields.Many2one('openacademy.course', on_delete='cascade', string='Course', required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")

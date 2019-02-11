@@ -8,13 +8,15 @@
         <notebook position="inside">
             <page string="Sessions">
                 <group>
-                    <field name="is_instructor"/>
                     <field name="session_ids"/>
                 </group>
             </page>
         </notebook>
     </field>
   </record>
+
+
+
 
     <record model="ir.actions.act_window" id="contact_list_action">
         <field name="name">Contacts</field>
@@ -25,4 +27,12 @@
                 parent="openacademy.main"/>
     <menuitem id="contact_menu" name="Contacts" parent="configuration_menu"  action="contact_list_action"/>
 
+    <record model="ir.actions.act_window" id="contact_cat_list_action">
+        <field name="name">Contact Tags</field>
+        <field name="res_model">res.partner.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="contact_cat_menu" name="Contact Tags"
+    parent="configuration_menu"
+    action="contact_cat_list_action"/>
 </odoo>
