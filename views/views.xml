@@ -2,7 +2,7 @@
   <data>
   <!--   View   form example         -->
 
-  <record model="ir.ui.view"  id="dairy.view">
+  <record model="ir.ui.view"  id="openacademy.course_view">
     <field name="name">course_view</field>
     <field name="model">openacademy.course</field>
     <field name="priority" eval="16"/>
