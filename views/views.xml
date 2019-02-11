@@ -1,5 +1,41 @@
 <odoo>
   <data>
+  <!--   View   form example         -->
+
+  <record model="ir.ui.view"  id="dairy.view">
+    <field name="name">course_view</field>
+    <field name="model">openacademy.course</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+      <form string="Course Form">
+        <sheet>
+          <span><label for="name"></label></span>
+          <h1><field name="name"></field></h1>
+          <hr size="3px"/>
+          <br/>
+          <notebook>
+            <page string="Description">
+              <field name="description"></field>
+            </page>
+            <page string="Info">
+              <group>
+                  <span><label for="create_uid"></label></span>
+                  <p><field name="create_uid"></field></p>
+              </group>
+              <group>
+                  <span><label for="__last_update"></label></span>
+                  <p><field name="__last_update"></field></p>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+
+
     <!-- explicit list view definition -->
     
     <record model="ir.ui.view" id="openacademy.list">
@@ -10,6 +46,19 @@
           <field name="name"/>
           <field name="description"/>
         </tree>
+      </field>
+    </record>
+
+    <!--   View   search example         -->
+    <record model="ir.ui.view"  id="dairy.search">
+    <field name="name">course_view</field>
+    <field name="model">openacademy.course</field>
+      <field name="priority" eval="16"/>
+      <field name="arch" type="xml">
+        <search string="Dairy Search">
+          <field name="name"></field>
+          <field name="description"></field>
+        </search>
       </field>
     </record>
 
