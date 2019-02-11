@@ -7,6 +7,8 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="instructor_id"></field>
+                        <field name="course_id"></field>
                     </group>
                     <group>
                         <h3>Info</h3>
@@ -19,6 +21,33 @@
                 </sheet>
             </form>
         </field>
+    </record>
+
+        
+    <record model="ir.ui.view" id="openacademy.session_list">
+      <field name="name">openacademy</field>
+      <field name="model">openacademy.session</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="instructor_id"/>
+          
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.ui.view"  id="openacademy.session_search">
+    <field name="name">course_view</field>
+    <field name="model">openacademy.session</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <search>
+          <field name="name"></field>
+          <field name="instructor_id"></field>
+        </search>
+      </field>
     </record>
 
     <record model="ir.actions.act_window" id="session_list_action">

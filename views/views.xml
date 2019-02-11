@@ -11,6 +11,7 @@
         <sheet>
           <span><label for="name"></label></span>
           <h1><field name="name"></field></h1>
+          <field name="resp_user_id"></field>
           <hr size="3px"/>
           <br/>
           <notebook>
@@ -44,7 +45,8 @@
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
-          <field name="description"/>
+          <field name="resp_user_id"/>
+          <field name="description"></field>
         </tree>
       </field>
     </record>
@@ -55,8 +57,9 @@
     <field name="model">openacademy.course</field>
       <field name="priority" eval="16"/>
       <field name="arch" type="xml">
-        <search string="Dairy Search">
+        <search>
           <field name="name"></field>
+          <field name="resp_user_id"></field>
           <field name="description"></field>
         </search>
       </field>

@@ -8,6 +8,8 @@ class Course(models.Model):
 
     name = fields.Char(string='Title', required=True)
     description = fields.Text()
+    resp_user_id = fields.Many2one('res.users', on_delete='set null', string='Responsible', index=True)
+
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -17,3 +19,6 @@ class Session(models.Model):
     start_date = fields.Date()
     duration = fields.Float(digits=(6, 2), help="Duration in days") #por si el curso dura mediodia asi se puede representar
     seats = fields.Integer(string="Seat's number")
+
+    instructor_id = fields.Many2one('res.partner', string='Instructor')
+    course_id = fields.Many2one('openacademy.course', on_delete='cascade', string='Course', required=True)
