@@ -9,6 +9,7 @@
                         <field name="name"/>
                         <field name="instructor_id"></field>
                         <field name="course_id"></field>
+                        <field name="attendee_ids"></field>
                     </group>
                     <group>
                         <h3>Info</h3>
