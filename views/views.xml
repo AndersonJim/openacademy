@@ -52,7 +52,7 @@
     </record>
 
     <!--   View   search example         -->
-    <record model="ir.ui.view"  id="dairy.search">
+    <record model="ir.ui.view"  id="openacademy.search">
     <field name="name">course_view</field>
     <field name="model">openacademy.course</field>
       <field name="priority" eval="16"/>
@@ -61,6 +61,7 @@
           <field name="name"></field>
           <field name="resp_user_id"></field>
           <field name="description"></field>
+          
         </search>
       </field>
     </record>
