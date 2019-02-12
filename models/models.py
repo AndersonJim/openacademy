@@ -11,6 +11,10 @@ class Course(models.Model):
     resp_user_id = fields.Many2one('res.users', on_delete='set null', string='Responsible', index=True)
     session_ids = fields.One2many('openacademy.session', 'course_id', string="Sessions")
 
+    #_sql_constraints  es un array de constraint 
+    #estructura de un contraint (nombre del constraint, sentencia sql, mensaje de error)
+    _sql_constraints = [('name_course_unique', 'UNIQUE(name)', 'This course title is in use.'), 
+                        ('name_desc_must_diff', 'CHECK(name != description)', 'Title must not be in description.')]
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -26,6 +30,9 @@ class Session(models.Model):
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     taken_seats = fields.Float(digits=(6, 2), compute='_taken_seats', string='Taken seats')
 
+    
+    #en un computed field el onchange esta por default
+    #self es en este caso es un recordset -> [row,row,row]
     @api.depends('seats','attendee_ids')
     def _taken_seats(self):
         for record in self:
