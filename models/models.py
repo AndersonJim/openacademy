@@ -49,6 +49,8 @@ class Session(models.Model):
     course_id = fields.Many2one('openacademy.course', on_delete='cascade', string='Course', required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     taken_seats = fields.Float(digits=(6, 2), compute='_taken_seats', string='Taken seats')
+    
+    color = fields.Integer()
 
     
     #en un computed field el onchange esta por default
