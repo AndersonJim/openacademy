@@ -1,6 +1,8 @@
  #-*- coding: utf-8 -*-
 
+from datetime import timedelta
 from odoo import models, fields, api
+
 
 class Course(models.Model):
     _name = 'openacademy.course'
@@ -40,6 +42,7 @@ class Session(models.Model):
     name = fields.Char(required=True)
     start_date = fields.Date()
     duration = fields.Float(digits=(6, 2), help="Duration in days") #por si el curso dura mediodia asi se puede representar
+    end_date = fields.Date(string='End date',compute='_end_date')
     seats = fields.Integer(string="Seat's number", required=True)
 
     instructor_id = fields.Many2one('res.partner', string='Instructor', domain=['|', ('is_instructor', '=', True),'|',('category_id.name', 'ilike', 'Teacher'), ('category_id.parent_id.name', 'ilike', 'Teacher')])
@@ -55,6 +58,18 @@ class Session(models.Model):
         for record in self:
             if record.seats > 0:
                 record.taken_seats = float(len(record.attendee_ids)/record.seats) * 100  
+
+    @api.depends('duration', 'start_date')
+    def _end_date(self):
+        for record in self:
+            if not (record.start_date and record.duration):
+                record.end_date = record.start_date
+                continue
+
+            start = fields.Datetime.from_string(record.start_date)
+            duration = timedelta(days=record.duration, seconds=-1)
+            record.end_date = str(start + duration)
+
     
     @api.onchange('seats','attendee_ids')
     def _verify_valid_seats(self):
