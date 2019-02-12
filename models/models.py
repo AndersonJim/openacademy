@@ -13,8 +13,24 @@ class Course(models.Model):
 
     #_sql_constraints  es un array de constraint 
     #estructura de un contraint (nombre del constraint, sentencia sql, mensaje de error)
+    #when a field is unique cant use duplicated
     _sql_constraints = [('name_course_unique', 'UNIQUE(name)', 'This course title is in use.'), 
                         ('name_desc_must_diff', 'CHECK(name != description)', 'Title must not be in description.')]
+
+    @api.multi
+    def copy(self, default=None):
+        default = dict(default or {})
+
+        copied_count = self.search_count(
+            [('name', '=like', "Copy of {}%".format(self.name))])
+        if not copied_count:
+            new_name = "Copy of {}".format(self.name)
+        else:
+            new_name = "Copy of {} ({})".format(self.name, copied_count)
+
+        default['name'] = new_name
+        return super(Course, self).copy(default)
+
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -32,7 +48,7 @@ class Session(models.Model):
 
     
     #en un computed field el onchange esta por default
-    #self es en este caso es un recordset -> [row,row,row]
+    #self es en este caso es un recordset -> [row,row,rows]
     @api.depends('seats','attendee_ids')
     def _taken_seats(self):
         for record in self:
