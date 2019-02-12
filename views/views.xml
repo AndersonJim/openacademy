@@ -46,7 +46,7 @@
         <tree>
           <field name="name"/>
           <field name="resp_user_id"/>
-          <field name="description"></field>
+          
         </tree>
       </field>
     </record>
@@ -61,6 +61,12 @@
           <field name="name"></field>
           <field name="resp_user_id"></field>
           <field name="description"></field>
+          <filter name="my_courses" string="My Courses"
+          domain="[('resp_user_id', '=', uid)]"/>
+          <group string="Group By">
+            <filter name="by_responsible" string="Responsible"
+            context="{'group_by': 'resp_user_id'}"/>
+          </group>
           
         </search>
       </field>
@@ -73,6 +79,8 @@
       <field name="res_model">openacademy.course</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
+      <!-- sets default filtering-->
+      <field name="context" eval="{'search_default_my_courses': 1}"/>
     </record>
 
 
@@ -81,11 +89,9 @@
     <menuitem name="openacademy" id="openacademy.main"/>
 
     <!-- menu categories -->
-    <menuitem name="Course" id="openacademy.menu_1" parent="openacademy.main"/>
+    <menuitem name="Course" id="openacademy.menu_1" parent="openacademy.main" action='openacademy_action_window'/>
 
-    <!-- actions -->
 
-    <menuitem name="Course" id="openacademy.menu_1_list" parent="openacademy.menu_1"
-              action="openacademy_action_window"/>
+
   </data>
 </odoo>
