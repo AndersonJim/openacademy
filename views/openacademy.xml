@@ -30,9 +30,13 @@
       <field name="name">openacademy</field>
       <field name="model">openacademy.session</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree decoration-success='taken_seats&lt;60' decoration-warning=' taken_seats&gt;59' 
+              decoration-danger='taken_seats == 100'>
           <field name="name"/>
+          <field name="course_id"/>
           <field name="instructor_id"/>
+          <field name="start_date" />
+          
           <field name="taken_seats" widget="progressbar"/>
           
         </tree>

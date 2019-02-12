@@ -29,6 +29,7 @@ class Course(models.Model):
             new_name = "Copy of {} ({})".format(self.name, copied_count)
 
         default['name'] = new_name
+        #llama al metodo copy de la clase padre, y le pasa el diccionario con el campo a cambiar y retorna
         return super(Course, self).copy(default)
 
 
