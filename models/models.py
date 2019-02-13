@@ -1,14 +1,14 @@
  #-*- coding: utf-8 -*-
 
 from datetime import timedelta
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions, _
 
 
 class Course(models.Model):
     _name = 'openacademy.course'
     _description = 'Es parte del curso de open academy'
 
-    name = fields.Char(string='Title', required=True)
+    name = fields.Char(string=_('Title'), required=True)
     description = fields.Text()
     resp_user_id = fields.Many2one('res.users', on_delete='set null', string='Responsible', index=True)
     session_ids = fields.One2many('openacademy.session', 'course_id', string="Sessions")
@@ -24,11 +24,11 @@ class Course(models.Model):
         default = dict(default or {})
 
         copied_count = self.search_count(
-            [('name', '=like', "Copy of {}%".format(self.name))])
+            [('name', '=like', _("Copy of {}%").format(self.name))])
         if not copied_count:
-            new_name = "Copy of {}".format(self.name)
+            new_name = _("Copy of {}").format(self.name)
         else:
-            new_name = "Copy of {} ({})".format(self.name, copied_count)
+            new_name = _("Copy of {} ({})").format(self.name, copied_count)
 
         default['name'] = new_name
         #llama al metodo copy de la clase padre, y le pasa el diccionario con el campo a cambiar y retorna
@@ -41,14 +41,14 @@ class Session(models.Model):
 
     name = fields.Char(required=True)
     start_date = fields.Date()
-    duration = fields.Float(digits=(6, 2), help="Duration in days") #por si el curso dura mediodia asi se puede representar
-    end_date = fields.Date(string='End date',compute='_end_date')
-    seats = fields.Integer(string="Seat's number", required=True)
+    duration = fields.Float(digits=(6, 2), help=_("Duration in days")) #por si el curso dura mediodia asi se puede representar
+    end_date = fields.Date(string=_('End date'),compute='_end_date')
+    seats = fields.Integer(string=_("Seat's number"), required=True)
 
     instructor_id = fields.Many2one('res.partner', string='Instructor', domain=['|', ('is_instructor', '=', True),'|',('category_id.name', 'ilike', 'Teacher'), ('category_id.parent_id.name', 'ilike', 'Teacher')])
     course_id = fields.Many2one('openacademy.course', on_delete='cascade', string='Course', required=True)
-    attendee_ids = fields.Many2many('res.partner', string="Attendees")
-    taken_seats = fields.Float(digits=(6, 2), compute='_taken_seats', string='Taken seats')
+    attendee_ids = fields.Many2many('res.partner', string=_("Attendees"))
+    taken_seats = fields.Float(digits=(6, 2), compute='_taken_seats', string=_('Taken seats'))
     
     color = fields.Integer()
 
@@ -79,14 +79,14 @@ class Session(models.Model):
             if rec.seats < 0:
                 return {
                     'warning': {
-                        'title': "Incorrect 'seats' value",
-                        'message': "The number of available seats may not be negative",
+                        'title': _("Incorrect 'seats' value"),
+                        'message': _("The number of available seats may not be negative"),
                     },
                 }
             if rec.seats < len(rec.attendee_ids):
                 return {
                     'warning': {
-                        'title': "Too many attendees",
-                        'message': "Increase seats or remove excess attendees",
+                        'title': _("Too many attendees"),
+                        'message': _("Increase seats or remove excess attendees"),
                     },
                 }
