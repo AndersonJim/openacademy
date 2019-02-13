@@ -9,17 +9,22 @@
                         <field name="name"/>
                         <field name="instructor_id"></field>
                         <field name="course_id"></field>
-                        <field name="attendee_ids"></field>
                         <field name="taken_seats" widget="progressbar"/>
                     </group>
-                    <group>
-                        <h3>Info</h3>
-                        <field name="start_date"/>
+                    <notebook>
+                        <page string="Info" name="info">
+                            <group>
+                                <field name="start_date"/>
 
-                        <field name="duration"/>
+                                <field name="duration"/>
 
-                        <field name="seats"/>
-                    </group>
+                                <field name="seats"/>
+                            </group>
+                        </page>
+                        <page string="Attendees">
+                            <field name="attendee_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -132,7 +137,7 @@
         <field name="arch" type='xml'>
             <form string="Add attendees">
                 <group>
-                    <field name="session_id"/>
+                    <field name="session_ids"/>
                     <field name="attendee_ids"/>
                 </group>
                 <footer>
