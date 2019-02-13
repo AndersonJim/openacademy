@@ -124,4 +124,32 @@
     </record>
 
     <menuitem id="session_menu" name="Sessions" parent="openacademy.main" action="session_list_action"/>
+    <!-- Wizard  -->
+    <!---  Los wizards aparecen en el buton action -->
+    <record model='ir.ui.view' id='openacademy.wizard_session_form'>
+        <field name="name">wizard_form </field>
+        <field name="model">openacademy.wizard</field>
+        <field name="arch" type='xml'>
+            <form string="Add attendees">
+                <group>
+                    <field name="session_id"/>
+                    <field name="attendee_ids"/>
+                </group>
+                <footer>
+                    <button name="subscribe" type="object" string="Subscribe" class="oe_highlight"/>
+                            or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id='launch_session_wizard'
+                name='Add Atendees'
+                src_model='openacademy.session'
+                res_model='openacademy.wizard'
+                view_mode='form'
+                target='new'
+                key2='client_action_multi'
+                />
 </odoo>
