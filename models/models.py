@@ -41,7 +41,7 @@ class Session(models.Model):
 
     name = fields.Char(required=True)
     start_date = fields.Date()
-    duration = fields.Float(digits=(6, 2), help=_("Duration in days")) #por si el curso dura mediodia asi se puede representar
+    duration = fields.Float(digits=(6, 2), string=_('duration'), help=_("Duration in days")) #por si el curso dura mediodia asi se puede representar
     end_date = fields.Date(string=_('End date'),compute='_end_date')
     seats = fields.Integer(string=_("Seat's number"), required=True)
 

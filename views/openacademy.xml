@@ -61,13 +61,13 @@
                             </div>
                             <div t-attf-class="oe_kanban_content">
                                 <!-- title -->
-                                Session:
+                                <label for="name">Session</label>
                                 <field name="name"/>
                                 <br/>
-                                Start date:
+                                <label for="start_date">start date</label>
                                 <field name="start_date"/>
                                 <br/>
-                                duration:
+                                <label for="duration">duration</label>
                                 <field name="duration"/>
                             </div>
                         </div>

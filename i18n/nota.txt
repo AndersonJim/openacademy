@@ -1,0 +1,19 @@
+La traducciones son modulares se cargan automaticamente cuando se 
+vuelve a cargar el idioma en odoo, recuerda marcar sobreescribir 
+terminos existentes. no se tiene que poner en el manifest
+
+
+pasos
+
+1. exportar idioma
+2. seleciona template
+3. selecciona el idioma
+4. selecciona el modulo
+5. selecciona archivo .po
+6. traduce los terminos en el archivo
+7. guarda el archivo en la carpeta modulo/i18n (ej:i18n/es_VE.po)
+8. en odoo,ve a traducciones
+9. cargar traducciones
+10.selecciona el idioma
+11.marca sobreescribir terminos
+12.dale a cargar  
